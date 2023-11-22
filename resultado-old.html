@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='app/static/assets/css/general.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='app/static/assets/css/resultado.css')}}"><title>JSON Visualization</title>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <header>
+            <a href="index.html">
+                <img src="{{ url_for('static', filename='app/static/assets/img/logo.png')}}" alt="Logo" class="logo">
+            </a>
+        </header>
+
+        <h2 class="mt-4">Contrato: ########</h2>
+
+
+        <div id="app" class="mt-4"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app/static/assets/js/resultado-doc.js)'}}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+</body>
+
+</html>

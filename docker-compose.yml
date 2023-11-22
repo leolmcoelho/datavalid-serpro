@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    image: myflaskapp:latest  # Nome da imagem que será construída
+    container_name: myflaskapp  # Nome do contêiner
+    ports:
+      - "5000:5000"
+    restart: always  # Reinicie o contêiner automaticamente em caso de falhas
+
+    # Adicione esta seção se você estiver usando Gunicorn
+    command: gunicorn -w 4 -b 0.0.0.0:5000 run:app
+
+    # Adicione esta seção para montar um volume (ajuste conforme necessário)
+    volumes:
+      - ./app:/app
+
+    # Adicione esta seção para configurar variáveis de ambiente
+    environment:
+      - FLASK_ENV=production
+      - FLASK_DEBUG=0
+
+    # Adicione esta seção para redes
+    networks:
+      - my_network
+
+networks:
+  my_network:

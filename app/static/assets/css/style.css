@@ -1,0 +1,281 @@
+@charset "UTF-8";
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+header {
+  background-color: #0f2b46;
+  height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  max-height: 50px;
+  margin-right: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  align-items: center;
+}
+.container h1 {
+  color: rgb(0, 54, 198);
+}
+.container .modal {
+  display: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.container .modal .modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.container .modal .modal-content .photo-cropped {
+  display: none;
+}
+.container .hidden {
+  display: none;
+}
+.container .button {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.container button {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: #fefefe;
+  margin-top: 20px;
+  padding: 10px 50px;
+}
+.container input {
+  margin-bottom: 10px;
+  border-color: #ddd;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  width: 60%;
+}
+.option p {
+  font-size: 18px;
+  margin-bottom: 0px;
+}
+.option .options-2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.option .options-2 label {
+  font-size: 14px;
+}
+.option .options-2 input {
+  margin: 6px 3px;
+  margin-left: 50px;
+}
+
+form {
+  flex-direction: column;
+}
+
+.photo-input {
+  background-color: aqua;
+  display: none;
+  border: 1px solid #ddd;
+  width: 30px;
+  height: 30px;
+  background: url("../img/add_photo.svg") no-repeat center center;
+}
+
+.hidden {
+  display: none;
+}
+
+.data-insert {
+  display: flex;
+  min-height: 40vh;
+}
+
+#image-container {
+  max-width: 18vw;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+#uploaded-image {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Esta propriedade mantém a proporcionalidade da imagem */
+}
+
+/* Estilo adicional para realçar que o container é clicável */
+#image-container:hover {
+  border: 2px solid #007bff; /* Cor azul como exemplo, você pode ajustar conforme necessário */
+}
+
+.container-image1 {
+  display: flex;
+  height: 25vh;
+  justify-content: center;
+}
+
+#document-form {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-image-doc {
+  display: flex;
+
+}
+.container-image-doc .image-container {
+  padding: 10px;
+  max-width: 24vw;
+  width: 20vh;
+  height: auto;
+  cursor: pointer;
+}
+
+.container-image-doc {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.container-image-profile {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  height: 200px;
+}
+
+.image-container {
+  position: relative;
+  max-width: 200px;
+  max-height: 200px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image-container input[type="file"] {
+  visibility: hidden;
+  position: absolute;
+}
+
+#uploaded-image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.uploaded-image {
+  max-width: 100%;
+  max-height: 100%;
+
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  visibility: hidden;
+  position: absolute;
+}
+
+.upload-text {
+  margin: 0;
+}
+
+.image-container:hover {
+  border: 2px solid #007bff;
+}
+
+/*
+ #loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+
+    .loading-spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  } */
+#facial-option:checked {
+  background-color: red;
+}
+
+.resultados {
+  margin-top: 10px;
+  font-size: 18px;
+  text-align: center;
+}
+
+#alert-message {
+    color: red; /* cor do texto */
+    font-size: 20px; /* tamanho do texto */
+    font-weight: bold; /* texto em negrito */
+    text-align: center; /* centralizar o texto */
+    padding: 20px; /* adicionar padding */
+    margin: 10px; /* adicionar margin */
+    border: 1px solid red; /* adicionar uma borda vermelha */
+    background-color: #f8d7da; /* adicionar uma cor de fundo suave para melhorar a aparência da mensagem de erro */
+    border-radius: 4px; /* bordas arredondadas */
+}
+
+/*
+#document-section{
+    visibility: hidden;
+}
+*/ /*# sourceMappingURL=style.css.map */
