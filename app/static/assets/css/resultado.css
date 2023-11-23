@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-body{
+body {
   width: unset;
 }
 .rotate-icon {
@@ -91,4 +91,11 @@ h3 {
   box-sizing: border-box;
   margin-bottom: 0px;
   justify-content: flex-start;
-}/*# sourceMappingURL=resultado.css.map */
+} /*# sourceMappingURL=resultado.css.map */
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  align-items: center;
+}

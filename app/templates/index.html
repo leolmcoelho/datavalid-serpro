@@ -24,7 +24,7 @@
 
 <body>
     <header>
-        <a href="index.html">
+        <a href="/">
             <img src="{{ url_for('static', filename='assets/img/logo.png')}}" alt="Logo" class="logo">
         </a>
     </header>
@@ -54,7 +54,7 @@
             <form id="facial-form">
                 <h1>Verificação Facial </h1>
                 <label for="contract-number">Número do Contrato:</label>
-                <input class="form-control" aria-describedby="inputGroup-sizing-default" type="number"
+                <input class="form-control" value="20015011" aria-describedby="inputGroup-sizing-default" type="number"
                     id="contract-number" name="contractNumber" required>
 
                 <div class="mb-3">
@@ -64,7 +64,7 @@
                 <div class="container-image-profile">
                     <div class="image-container">
                         <p class="upload-text">Insira a sua imagem</p>
-                        <input type="file" id="file-input-1" class="file-input" accept="image/*">
+                        <input type="file" id="file-input-1" class="file-input" accept="image/png, image/jpeg">
                         <img id="uploaded-image-1" src="" class="uploaded-image" alt="Imagem carregada">
                     </div>
                 </div>
@@ -73,7 +73,7 @@
 
                 <div class="button">
                     <button type="button" id="button-enviar" class="btn btn-primary"
-                        onclick="submitForm('document-form', this)">Enviar</button>
+                        onclick="submitForm('facial-form', this)">Enviar</button>
 
                 </div>
             </form>
@@ -87,26 +87,26 @@
                 <h1>Verificar Documentos</h1>
 
                 <label for="contract-number-doc">Número do Contrato:</label>
-                <input class="form-control" type="number" id="contract-number-doc" name="contractNumber">
+                <input class="form-control" value="20015011" type="number" id="contract-number-doc" name="contractNumber">
 
 
                 <div class="container-image-doc">
                     <div class="image-container">
                         <p class="upload-text">Foto de perfil</p>
-                        <input type="file" id="file-input-2" class="file-input" accept="image/*">
-                        <img id="uploaded-image-2" src="" class="uploaded-image" alt="Imagem carregada">
+                        <input type="file" id="file-input-2"   class="file-input" accept="image/png, image/jpeg">
+                        <img id="uploaded-image-2" src=""  name= 'biometria_face' class="uploaded-image" alt="Imagem carregada">
                     </div>
 
                     <div class="image-container">
                         <p class="upload-text">Documento Frente</p>
-                        <input type="file" id="file-input-3" class="file-input" accept="image/*">
-                        <img id="uploaded-image-3" src="" class="uploaded-image" alt="Imagem carregada">
+                        <input type="file" id="file-input-3" class="file-input" accept="image/png, image/jpeg">
+                        <img id="uploaded-image-3" src=""  name= 'documento' class="uploaded-image" alt="Imagem carregada">
                     </div>
 
                     <div class="image-container">
                         <p class="upload-text">Documento Verso</p>
-                        <input type="file" id="file-input-4" class="file-input" accept="image/*">
-                        <img id="uploaded-image-4" class="uploaded-image" src="#" alt="Imagem carregada">
+                        <input type="file" id="file-input-4"  class="file-input" accept="image/png, image/jpeg">
+                        <img id="uploaded-image-4" name= 'documento_verso' class="uploaded-image" src="#" alt="Imagem carregada">
                     </div>
                 </div>
                 <div class="button">

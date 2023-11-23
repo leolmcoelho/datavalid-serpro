@@ -13,7 +13,7 @@ COPY . /app/
 
 # Gunicorn deve ser instalado como uma dependência
 RUN pip install gunicorn
-
+RUN pip install -r requirements.txt
 # Exponha a porta em que o Gunicorn estará rodando
 EXPOSE 5000
 

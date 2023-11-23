@@ -1,4 +1,4 @@
-import os
+import os, json
 import sys
 
 sys.path.append(os.getcwd())
@@ -72,7 +72,7 @@ class DataHandler:
             'brasileiro nascido no exterior': 4
         }
 
-        return codes[name]
+        return str(codes[name])
 
     def get_client(self, contrato, _dict=False) -> ResultadoInterface:
         resultado = (
@@ -123,29 +123,30 @@ class DataHandler:
         return data
 
     def biometria(self, file, formart):
+        base64_data = file.split(",")[1]
         biometria_data = {
             "formato": formart,
-            "base64": file
+            "base64": base64_data
         }
         return biometria_data
 
-    def cnh(self, data):
+    def cnh(self, data:dict = {}):
         data_cnh = {
-            "categoria": data['categoria'],
-            "observacoes": data['observacoes'],
-            "numero_registro": data['registro'],
-            "data_primeira_habilitacao": data['primeria_cnh'],
-            "data_validade": data['validade'],
+            "categoria": data.get('categoria', ''),
+            "observacoes": data.get('observacoes', ''),
+            "numero_registro": data.get('registro', ''),
+            "data_primeira_habilitacao": data.get('primeria_cnh', ''),
+            "data_validade": data.get('validade', ''),
             "registro_nacional_estrangeiro": "",
-            "data_ultima_emissao": data['emissão'],
-            "codigo_situacao": data['cod_emissao'],
-            "possui_impedimento": data['impedimento']
+            "data_ultima_emissao": data.get('emissão', ''),
+            "codigo_situacao": data.get('cod_emissao', ''),
+            "possui_impedimento": data.get('impedimento', '')
         }
         return data_cnh
 
-    def make_pf_facial(self, contrato, data_files, data_cnh):
-        file = data_files['file']
-        formart = data_files['formart']
+    def make_pf_facial(self, contrato, data_files, data_cnh = {}):
+        file = data_files['src']
+        formart = data_files['extension']
 
         client = self.get_client(contrato)
         data = self.cpf(contrato)
@@ -176,11 +177,56 @@ class DataHandler:
                 "uf": client.UF
             },
         }
-
+        
         data["answer"]['cnh'] = self.cnh(data_cnh)
+
         data["answer"]['biometria_face'] = self.biometria(file, formart)
 
         return data
+
+
+    def make_doc(self, contrato, docs):
+        client = self.get_client(contrato)
+        data = self.cpf(contrato)
+
+        key = "answer"
+        data[key] = {}
+        items = ['documento', 'documento_verso', 'biometria_face']
+        for item in items:
+            _item = docs[item]
+            data[key][item] = self.biometria(_item['src'], _item['extension'])
+
+        return data
+    
+
+    def reorganizar_json(self, json_data):
+        # Carregar o JSON
+        data = json_data
+        if type(json_data) != dict:
+            data = json.loads(json_data)
+
+        # Criar um novo objeto "gerais" para armazenar elementos soltos
+        gerais = {}
+
+        # Iterar sobre os elementos e movê-los para "gerais"
+        keys_to_remove = []
+        for key, value in data.items():
+            if not isinstance(value, dict):
+                gerais[key] = value
+                keys_to_remove.append(key)
+
+        # Remover os elementos movidos para "gerais" do objeto original
+        for key in keys_to_remove:
+            data.pop(key)
+
+        # Adicionar "gerais" ao início do objeto original
+        data = {"gerais": gerais, **data}
+
+        # Converter de volta para JSON
+        # result_json = json.dumps(data, indent=2)
+        return data
+
+
 
 
 def encode_date(obj):

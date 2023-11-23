@@ -8,27 +8,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/general.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/resultado.css')}}">
-    <title>JSON Visualization</title>
+
+
+    <script defer src="{{ url_for('static', filename='assets/js/interacoes.js')}}"></script>
+    <script defer src="{{ url_for('static', filename='assets/js/resultado.js')}}"></script>
+    <script defer src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+    <title>Contrato: ########</title>
 </head>
 
 <body>
-    <div class="container1">
-        <header>
-            <a href="index.html">
-                <img src="{{ url_for('static', filename='assets/img/logo.png')}}" alt="Logo" class="logo">
-            </a>
-        </header>
 
-        <h2 class="mt-4">Contrato: ########</h2>
+    <header>
+        <a href="/">
+            <img src="{{ url_for('static', filename='assets/img/logo.png')}}" alt="Logo" class="logo">
+        </a>
+    </header>
+    <div class="container">
+        <div class="head">
+            <h2 class="">Contrato: </h2>
+            <div class="btns">
+                <button class="btn btn-primary">Imprimir dados</button>
+            </div>
+
+        </div>
 
 
         <div id="app" class="mt-4"></div>
     </div>
-
-    <script src="{{ url_for('static', filename='assets/js/resultado.js')}}"></script> <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
 </body>
 

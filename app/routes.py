@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template, Blueprint
 
 from app.application import DataAPI
-
+import traceback
 import json
 
 api_blueprint = Blueprint('api', __name__, url_prefix='/api')
@@ -9,45 +9,61 @@ api_blueprint = Blueprint('api', __name__, url_prefix='/api')
 
 @api_blueprint.route('/pf-facial-cdv', methods=['POST'])
 def pf_facial_cdv():
-    if request.is_json:
-        try:
-            data = request.json
-            # print(data)
-            nome = data.get("answer", {}).get("nome", "")
+    try:
+        # Obter dados brutos da solicitação
+        raw_data = request.get_data(as_text=True)
+        data = json.loads(raw_data)
+        contrato = data.get("contrato")  # Use .get() para evitar KeyError se "contrato" não estiver presente
+        images = data.get("images")
 
-            api = DataAPI()
-            api.get_client()
+        api = DataAPI()
+        response = api.validacao_documento(data)
 
+        if not contrato:
+            return jsonify({"message": "Não foi passado nenhum número de contrato"}), 400
 
-            return jsonify({"message": f"Recebido com sucesso! Nome: {nome}"})
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-    else:
-        # Se a solicitação não contiver dados JSON, retorna um erro
-        return jsonify({"error": "A solicitação deve conter dados JSON"}), 400
+        return jsonify(response)
+
+    except json.decoder.JSONDecodeError as e:
+        print(f"JSON Decode Error: {e}")
+        return jsonify({"error": "Falha ao decodificar objeto JSON"}), 400
+    except Exception as e:
+        print(e)
+        return jsonify({"error": str(e)}), 500
 
 
 @api_blueprint.route('/pf-facial', methods=['POST'])
 def pf_facial():
-    if request.is_json:
-        try:
-            contrato = 11
-            data =request.json 
-            print(data)
-            contrato = data["contrato"]
+    try:
+        # Obter dados brutos da solicitação
+        raw_data = request.get_data(as_text=True)
+        #print(raw_data)
 
-            print(contrato)
-            api = DataAPI()
-            response = api.validacao_facial(data)
+        # Tentar analisar manualmente os dados como JSON
+        data = json.loads(raw_data)
 
-            if not contrato:
-                return jsonify({"message": f"Não foi passado nenhum numero de contrato"}), 400
-            
+        #print(data.keys())
+        # Continue com o processamento dos dados
+        contrato = data.get("contrato")  # Use .get() para evitar KeyError se "contrato" não estiver presente
+        if not contrato:
+            return jsonify({"message": "Não foi passado nenhum número de contrato"}), 400
 
-            return jsonify(response)
-        except Exception as e:
-            print(e)
-            return jsonify({"error": e}), 500
-    else:
-        # Se a solicitação não contiver dados JSON, retorna um erro
-        return jsonify({"error": "A solicitação deve conter dados JSON"}), 400
+        
+        images = data.get("images")
+
+        #print(images)
+
+        api = DataAPI()
+        response = api.validacao_facial(data)
+
+        return jsonify(response)
+
+    except json.decoder.JSONDecodeError as e:
+        print(f"JSON Decode Error: {e}")
+        return jsonify({"error": "Falha ao decodificar objeto JSON", "code": 400}), 400
+    
+    except Exception as e:
+        #print(e)
+        traceback.print_exc()
+        
+        return jsonify({"error": str(e), "code": 500}), 500

@@ -1,8 +1,5 @@
 # run.py
-from app import routes, views
 from app import app
-# import app.api_route
-from flask import Flask, request, jsonify
 
 
 
